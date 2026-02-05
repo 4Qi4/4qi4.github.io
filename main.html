@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>失梦的小站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary: #222831;
+            --secondary: #393e46;
+            --dark: #000000;
+            --light: #eeeeee;
+            --accent: #00adb5;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --card-bg: #1a1a1a;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            padding: 80px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #bbbbbb;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: rgba(0, 173, 181, 0.2);
+            color: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        
+        /* 主体内容 */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px 0 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 介绍卡片 */
+        .intro-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .intro-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .intro-card h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .intro-card h2 i {
+            font-size: 1.5rem;
+        }
+        
+        .intro-text p {
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+        
+        .age-highlight {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        /* 技能部分 */
+        .skills {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .skill-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .skill-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent);
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .skill-name {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        .skill-years {
+            color: var(--light);
+            font-weight: 600;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--accent), #00d4dd);
+        }
+        
+        /* 联系卡片 */
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            grid-column: span 2;
+            margin-top: 20px;
+            border: 1px solid #333;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-card {
+                grid-column: span 1;
+            }
+        }
+        
+        .contact-card h2 {
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-items {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 25px;
+            border-radius: 15px;
+            background: #222;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 160px;
+            border: 1px solid #333;
+            text-decoration: none;
+        }
+        
+        .contact-item:hover {
+            background: rgba(0, 173, 181, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .wechat-icon {
+            background: linear-gradient(135deg, #222, #333);
+            border: 2px solid #09b83e;
+        }
+        
+        .qq-icon {
+            background: linear-gradient(135deg, #222, #333);
+            border: 2px solid #12b7f5;
+        }
+        
+        .bilibili-icon {
+            background: linear-gradient(135deg, #222, #333);
+            border: 2px solid #fb7299;
+        }
+        
+        .code-icon {
+            background: linear-gradient(135deg, #222, #333);
+            border: 2px solid #ff9800;
+        }
+        
+        .acgo-icon {
+            background: linear-gradient(135deg, #222, #333);
+            border: 2px solid #9c27b0;
+        }
+        
+        .contact-text {
+            text-align: center;
+        }
+        
+        .contact-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+        
+        .contact-id {
+            color: #bbbbbb;
+            font-size: 0.9rem;
+            word-break: break-all;
+            max-width: 150px;
+        }
+        
+        .copy-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent);
+            color: black;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+        }
+        
+        .copy-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 1100px) {
+            .contact-items {
+                gap: 20px;
+            }
+            
+            .contact-item {
+                min-width: 140px;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .intro-card, .contact-card {
+                padding: 25px;
+            }
+            
+            .contact-items {
+                gap: 15px;
+            }
+            
+            .contact-item {
+                min-width: 130px;
+                padding: 15px;
+            }
+            
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        .link-item {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title floating">失梦的小站</h1>
+            <p class="subtitle">13岁初中生 | 编程爱好者 | 技术探索者</p>
+            <div class="tag">梦想在代码中绽放</div>
+        </header>
+        
+        <main class="content">
+            <div class="intro-card">
+                <h2><i class="fas fa-user"></i> 关于</h2>
+                <div class="intro-text">
+                    <p><span class="age-highlight">失梦</span>，一名<span class="age-highlight">13岁</span>的初中生，对编程有着浓厚的兴趣和热情。</p>
+                    <p>从小学开始接触编程，已有几年的学习经历。喜欢通过代码创造有趣的东西，解决实际问题，探索技术的无限可能。</p>
+                </div>
+            </div>
+            
+            <div class="skills">
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Scratch 编程</span>
+                        <span class="skill-years">3年经验</span>
+                    </div>
+                    <p style="margin-bottom: 15px; color: #aaa;">编程起点，通过可视化编程理解了基础逻辑和算法思想。</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Python 开发</span>
+                        <span class="skill-years">2年经验</span>
+                    </div>
+                    <p style="margin-bottom: 15px; color: #aaa;">目前最熟悉的语言，用于数据分析、自动化脚本和小游戏开发。</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">C++ 学习</span>
+                        <span class="skill-years">半年经验</span>
+                    </div>
+                    <p style="margin-bottom: 15px; color: #aaa;">正在深入学习中，探索更底层的编程和算法竞赛。</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <h2><i class="fas fa-comments"></i> 联系</h2>
+                <div class="contact-items">
+                    <div class="contact-item" id="wechat-contact">
+                        <div class="contact-icon wechat-icon">
+                            <i class="fab fa-weixin"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-name">微信</div>
+                            <div class="contact-id" id="wechat-id">QianHQi001</div>
+                            <small style="color: #888; margin-top: 5px; display: block;">点击复制</small>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item" id="qq-contact">
+                        <div class="contact-icon qq-icon">
+                            <i class="fab fa-qq"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-name">QQ</div>
+                            <div class="contact-id" id="qq-id">3574754305</div>
+                            <small style="color: #888; margin-top: 5px; display: block;">点击复制</small>
+                        </div>
+                    </div>
+                    
+                    <a href="https://world.xiaomawang.com/w/person/project/all/4181489" target="_blank" class="contact-item link-item">
+                        <div class="contact-icon code-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-name">小码王社区</div>
+                            <div class="contact-id">个人项目主页</div>
+                            <small style="color: #888; margin-top: 5px; display: block;">点击访问</small>
+                        </div>
+                    </a>
+                    
+                    <a href="https://space.bilibili.com/1795403609?spm_id_from=333.1007.0.0" target="_blank" class="contact-item link-item">
+                        <div class="contact-icon bilibili-icon">
+                            <i class="fab fa-bilibili"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-name">Bilibili</div>
+                            <div class="contact-id">1795403609</div>
+                            <small style="color: #888; margin-top: 5px; display: block;">点击访问</small>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.acgo.cn/person/4181489" target="_blank" class="contact-item link-item">
+                        <div class="contact-icon acgo-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="contact-text">
+                            <div class="contact-name">AcGo</div>
+                            <div class="contact-id">个人主页</div>
+                            <small style="color: #888; margin-top: 5px; display: block;">点击访问</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <!-- 页脚内容已移除 -->
+        </footer>
+    </div>
+    
+    <div class="copy-notification" id="copy-notification">已复制到剪贴板！</div>
+
+    <script>
+        // 复制功能实现
+        function copyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            
+            // 显示复制成功提示
+            const notification = document.getElementById("copy-notification");
+            notification.classList.add("show");
+            
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 2000);
+        }
+        
+        // 微信联系点击事件
+        document.getElementById("wechat-contact").addEventListener("click", function() {
+            const wechatId = document.getElementById("wechat-id").textContent;
+            copyToClipboard(wechatId);
+        });
+        
+        // QQ联系点击事件
+        document.getElementById("qq-contact").addEventListener("click", function() {
+            const qqId = document.getElementById("qq-id").textContent;
+            copyToClipboard(qqId);
+        });
+        
+        // 添加一些交互效果
+        document.querySelectorAll('.skill-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const progressBar = this.querySelector('.skill-progress');
+                progressBar.style.transition = 'width 1s ease';
+            });
+        });
+        
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
