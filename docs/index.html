@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (head 部分保持不变) ... -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        window.$docsify = {
+            // 网站名称，会显示在侧边栏
+            name: 'Qhawawa 帮助文档',
+            // 右上角 GitHub 仓库链接
+            repo: 'https://github.com/4Qi4/4qi4.github.io',
+            // 开启加载侧边栏 (_sidebar.md)
+            loadSidebar: true,
+            // 开启加载导航栏 (_navbar.md)
+            loadNavbar: true,
+            // 开启封面 (_coverpage.md)
+            coverpage: false,
+            // 侧边栏中自动生成子标题的最大层级
+            subMaxLevel: 3,
+            // 开启全文搜索功能
+            search: {
+                maxAge: 86400000, // 索引过期时间
+                paths: 'auto',
+                placeholder: '搜索文档',
+                noData: '找不到结果',
+                depth: 4
+            }
+        }
+    </script>
+    <!-- 引入 Docsify 核心库和插件 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+</body>
+</html>
